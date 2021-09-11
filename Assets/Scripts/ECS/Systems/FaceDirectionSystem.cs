@@ -18,5 +18,6 @@ namespace ECS.Systems
                 }
             }).ScheduleParallel();
         }
+        
     }
 }
