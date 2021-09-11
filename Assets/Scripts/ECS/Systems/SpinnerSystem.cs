@@ -1,4 +1,5 @@
 using ECS.Components;
+using ECS.Tags;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -11,7 +12,9 @@ namespace ECS.Systems
         {
             float deltaTime = Time.DeltaTime;
 
-            Entities.ForEach((ref Rotation rot, in MoveData moveData) =>
+            Entities.
+                WithNone<PlayerTag>().
+                ForEach((ref Rotation rot, in MoveData moveData) =>
             {
                 quaternion normalizedRot = math.normalize((rot.Value));
                 quaternion angleToRotate = quaternion.AxisAngle(math.up(), moveData.turnSpeed * deltaTime);

@@ -1,4 +1,5 @@
 using ECS.Components;
+using ECS.Tags;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -11,7 +12,9 @@ namespace ECS.Systems
         {
             float deltaTime = Time.DeltaTime;
 
-            Entities.ForEach((ref Translation pos, in MoveData moveData, in Rotation rot) =>
+            Entities.
+                WithNone<PlayerTag>().
+                ForEach((ref Translation pos, in MoveData moveData, in Rotation rot) =>
             {
                 float3 forwardDirection = math.forward(rot.Value);
                 pos.Value += forwardDirection * moveData.speed * deltaTime;
