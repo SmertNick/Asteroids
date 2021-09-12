@@ -10,5 +10,6 @@ namespace ECS.Components
         public KeyCode DownKey;
         public KeyCode LeftKey;
         public KeyCode RightKey;
+        public KeyCode FireKey;
     }
 }
