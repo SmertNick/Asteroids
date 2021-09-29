@@ -6,6 +6,7 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Physics;
 using Unity.Physics.Systems;
+using UnityEngine;
 
 namespace ECS.Systems
 {
@@ -32,29 +33,29 @@ namespace ECS.Systems
 
             public void Execute(CollisionEvent collision)
             {
-                // if (players.HasComponent(collision.EntityA) && asteroids.HasComponent(collision.EntityB))
-                // {
-                //     var modifiedHealthData = healthData[collision.EntityA];
-                //     modifiedHealthData.isDead = true;
-                //     healthData[collision.EntityA] = modifiedHealthData;
-                // }
-                // else if (players.HasComponent(collision.EntityB) && asteroids.HasComponent(collision.EntityA))
-                // {
-                //     var modifiedHealthData = healthData[collision.EntityB];
-                //     modifiedHealthData.isDead = true;
-                //     healthData[collision.EntityB] = modifiedHealthData;
-                // }
-                // else if (projectiles.HasComponent(collision.EntityA) && asteroids.HasComponent(collision.EntityB) ||
-                //          projectiles.HasComponent(collision.EntityB) && asteroids.HasComponent(collision.EntityA))
-                // {
-                //     var modifiedHealthData = healthData[collision.EntityA];
-                //     modifiedHealthData.isDead = true;
-                //     healthData[collision.EntityA] = modifiedHealthData;
-                //     
-                //     modifiedHealthData = healthData[collision.EntityB];
-                //     modifiedHealthData.isDead = true;
-                //     healthData[collision.EntityB] = modifiedHealthData;
-                // }
+                if (players.HasComponent(collision.EntityA) && asteroids.HasComponent(collision.EntityB))
+                {
+                    var modifiedHealthData = healthData[collision.EntityA];
+                    modifiedHealthData.isDead = true;
+                    healthData[collision.EntityA] = modifiedHealthData;
+                }
+                else if (players.HasComponent(collision.EntityB) && asteroids.HasComponent(collision.EntityA))
+                {
+                    var modifiedHealthData = healthData[collision.EntityB];
+                    modifiedHealthData.isDead = true;
+                    healthData[collision.EntityB] = modifiedHealthData;
+                }
+                else if (projectiles.HasComponent(collision.EntityA) && asteroids.HasComponent(collision.EntityB) ||
+                         projectiles.HasComponent(collision.EntityB) && asteroids.HasComponent(collision.EntityA))
+                {
+                    var modifiedHealthData = healthData[collision.EntityA];
+                    modifiedHealthData.isDead = true;
+                    healthData[collision.EntityA] = modifiedHealthData;
+
+                    modifiedHealthData = healthData[collision.EntityB];
+                    modifiedHealthData.isDead = true;
+                    healthData[collision.EntityB] = modifiedHealthData;
+                }
             }
         }
        
